@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * Created by 胡志洁 on 2016/11/27.
  */
-@TaskTypeAnnotation(taskType="39TUMOURSPIDER", version="201611292207")
+@TaskTypeAnnotation(taskType="39TUMOURSPIDER", version="201612112207")
 public class TumourCrawler implements IBusinessCrawler {
     private String[] keyWord = {"癌","瘤","免疫力"};
 
@@ -50,6 +50,7 @@ public class TumourCrawler implements IBusinessCrawler {
                 Element divElement = elem;
                 Element titleElement = divElement.select(".span2").select(".title").select("a").first();
                 String title = titleElement.text();
+                String srcUrl = titleElement.attr("href");
                 Element ownerElement = divElement.select(".span3").select("a").first();
                 String owner = ownerElement.text();
                 Element timeElement = divElement.select(".span5").first();
@@ -60,6 +61,7 @@ public class TumourCrawler implements IBusinessCrawler {
                 tumourResultDetail.setTitle(title);
                 tumourResultDetail.setOwner(owner);
                 tumourResultDetail.setTime(time);
+                tumourResultDetail.setSrcUrl(srcUrl);
                 //construct Result
                 Result result = new Result(task.getTaskType(), null);
                 result.setBuildTime(task.getBuildTime());
@@ -68,7 +70,7 @@ public class TumourCrawler implements IBusinessCrawler {
 
                 if(title.contains(keyWord[0]) || title.contains(keyWord[1]) || title.contains(keyWord[2])){
                     resultList.add(result);
-                    //System.out.println("title:" + title + " owner :" + owner + " time : " + time);
+                    System.out.println("title:" + title + " owner :" + owner + " time : " + time + " srcUrl: " + srcUrl);
 
                 }
 

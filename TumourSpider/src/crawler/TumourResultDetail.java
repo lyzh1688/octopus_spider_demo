@@ -14,6 +14,8 @@ public class TumourResultDetail implements IResultDetail {
 
     private String time;
 
+    private String srcUrl;
+
     public String getTime() {
         return time;
     }
@@ -38,6 +40,13 @@ public class TumourResultDetail implements IResultDetail {
         this.title = title;
     }
 
+    public String getSrcUrl() {
+        return srcUrl;
+    }
+
+    public void setSrcUrl(String srcUrl) {
+        this.srcUrl = srcUrl;
+    }
     @Override
     public String toString() {
         return "TumourResultDetail [title=" + title + ", owner=" + owner + ", time=" + time  + "]";

@@ -7,7 +7,7 @@ import com.lz.octopus.common.task.TaskTypeAnnotation;
 /**
  * Created by 胡志洁 on 2016/11/27.
  */
-@TaskTypeAnnotation(taskType="39TUMOURSPIDER", version="201611292207")
+@TaskTypeAnnotation(taskType="39TUMOURSPIDER", version="201612112207")
 public class TumourTaskDetail extends ITaskDetail {
 
     private String url;

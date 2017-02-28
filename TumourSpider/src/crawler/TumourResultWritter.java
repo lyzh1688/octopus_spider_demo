@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by 胡志洁 on 2016/11/27.
  */
-@TaskTypeAnnotation(taskType="39TUMOURSPIDER", version="201611292207")
+@TaskTypeAnnotation(taskType="39TUMOURSPIDER", version="201612112207")
 public class TumourResultWritter implements IResultWritter{
 
     private JDBCUtils jdbcUtils = new JDBCUtils();
