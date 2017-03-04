@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author xiaowangzi
  */
-@TaskTypeAnnotation(taskType = "BAIDUNEWS", version = "201702182000")
+@TaskTypeAnnotation(taskType = "BAIDUNEWS", version = "201703032000")
 public class BaiduNewsTaskBuilder implements ITaskBuilder {
 
 	private final int pageCnt = 20;

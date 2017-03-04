@@ -6,7 +6,7 @@ import com.lz.octopus.common.task.TaskTypeAnnotation;
 /**
  * @author xiaowangzi
  */
-@TaskTypeAnnotation(taskType="BAIDUNEWS", version="201702182000")
+@TaskTypeAnnotation(taskType="BAIDUNEWS", version="201703032000")
 public class BaiduNewsTaskDetail extends ITaskDetail {
 
     private String url;
@@ -22,7 +22,6 @@ public class BaiduNewsTaskDetail extends ITaskDetail {
     public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
     }
-
     public String getTaskType() {
         return taskType;
     }

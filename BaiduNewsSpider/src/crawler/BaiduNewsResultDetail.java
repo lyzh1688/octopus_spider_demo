@@ -15,6 +15,7 @@ public class BaiduNewsResultDetail implements IResultDetail {
     private String time;
     private String title;
     private String href;
+    private String content;
     private String keyword;
 
     public String getKeyword() {
@@ -24,8 +25,6 @@ public class BaiduNewsResultDetail implements IResultDetail {
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
-
-
     public String getHref() {
         return href;
     }
@@ -58,9 +57,18 @@ public class BaiduNewsResultDetail implements IResultDetail {
         this.source = source;
     }
 
-    @Override
-    public String toString() {
-        return "BaiduNewsResultDetail [title=" + this.title + ", source=" + this.source + ", time=" + this.time + ", keyword=" + this.keyword
-                + ", href=" + this.href + "]";
-    }
+    public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	@Override
+	public String toString() {
+		return "BaiduNewsResultDetail [source=" + source + ", time=" + time + ", keyword=" + this.keyword +  ", title=" + title + ", href=" + href
+				+ ", content=" + content + "]";
+	}
+
 }

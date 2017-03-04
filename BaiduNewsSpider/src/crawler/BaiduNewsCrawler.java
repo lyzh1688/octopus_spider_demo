@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.lz.octopus.common.html.Extractor;
 import com.lz.octopus.common.httpclient.HttpClient;
 import com.lz.octopus.common.httpclient.HttpClientBuilder;
 import com.lz.octopus.common.result.Result;
@@ -21,7 +22,7 @@ import com.lz.octopus.crawler.IBusinessCrawler;
 /**
  * @author xiaowangzi
  */
-@TaskTypeAnnotation(taskType="BAIDUNEWS", version="201702182000")
+@TaskTypeAnnotation(taskType="BAIDUNEWS", version="201703032000")
 public class BaiduNewsCrawler implements IBusinessCrawler {
 
     private HttpClient httpClient;
@@ -54,6 +55,13 @@ public class BaiduNewsCrawler implements IBusinessCrawler {
             Element span = elem.select(".c-author").first();
             String source = span.text().split(" ")[0];
             String time = span.text().split(" ")[2];
+            String content = null;
+            try {
+				content = Extractor.getContentByUrl(href);
+			} catch (Exception e) {
+				e.printStackTrace();
+				content = title;
+			}
             
             BaiduNewsResultDetail baiduNewsResultDetail = new BaiduNewsResultDetail();
 
@@ -63,6 +71,7 @@ public class BaiduNewsCrawler implements IBusinessCrawler {
             baiduNewsResultDetail.setSource(source);
             baiduNewsResultDetail.setTitle(title);
             baiduNewsResultDetail.setKeyword(baiduNewsTaskDetail.getKeyWord());
+            baiduNewsResultDetail.setContent(content);
 
             //construct Result
             Result result = new Result(task.getTaskType(), null);
@@ -84,12 +93,20 @@ public class BaiduNewsCrawler implements IBusinessCrawler {
     public static void main(String[] args) {
         BaiduNewsCrawler c = new BaiduNewsCrawler();
         BaiduNewsTaskDetail taskDetail = new BaiduNewsTaskDetail();
-        taskDetail.setUrl("http://news.baidu.com/ns?word=Bloomindales&pn=0&cl=2&ct=1&tn=news&rn=20&ie=utf-8&bt=0&et=0");
+        taskDetail.setUrl("http://news.baidu.com/ns?word=梅西百货&pn=0&cl=2&ct=1&tn=news&rn=20&ie=utf-8&bt=0&et=0");
         TaskType taskType = new TaskType("BAIDU_NEWS", 5, 6);
         Task task = new Task(taskType, taskDetail);
-        List<Result> resultList = c.crawl(task);
-        resultList.forEach(System.out::println);
-        System.out.println(resultList);
+        long begin = System.currentTimeMillis();
+//        List<Result> resultList = c.crawl(task);
+        
+//        for(int i = 0;i<5;i++){
+//        	c.crawl(task); 
+//        }
+        c.crawl(task);
+      
+        long end = System.currentTimeMillis();
+//        resultList.forEach(System.out::println);
+//        System.out.println(resultList);
         
 //        List<ITaskDetail> taskList = new BaiduNewsTaskBuilder().buildTasks();
 //        taskList.forEach((t)->{
@@ -100,6 +117,6 @@ public class BaiduNewsCrawler implements IBusinessCrawler {
 //        	 resultList.forEach(System.out::println);
 //        });
         
-        System.out.println(" *** finished ***");
+        System.out.println(" *** finished,collapse: "+((end-begin)/1000d)+"seconds ***");
     }
 }
